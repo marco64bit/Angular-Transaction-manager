@@ -1,3 +1,3 @@
 'use strict';
 
-var app = angular.module('transactionApp', []);
+var app = angular.module('transactionApp', ['transactionManager']);

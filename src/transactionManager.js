@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('TransactionManager', function() {
+angular.module("transactionManager", []).service('TransactionManager', function() {
 
 	var doRollback = function(variable, prevVersion) {
 		var tmp = angular.copy(variable);
