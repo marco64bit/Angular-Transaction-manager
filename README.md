@@ -20,11 +20,14 @@ var app = angular.module('myApp', ['transactionManager']);
 
 <h3> try demo </h3>
 
-Open example folder
+<a href="https://jsfiddle.net/marco_pretelli/0fa6yxb6/1/"> Live demo! </a>
 
-install npm
-intsall grunt
-install bower
+or Open example folder and run
+<pre>
+ npm install
+ grunt install
+ bower install
+</pre>
 
 run grunt server in example folder
 
