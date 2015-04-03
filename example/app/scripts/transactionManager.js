@@ -18,8 +18,10 @@ function TransactionManager() {
     function doRollback(object) {
         var lastSnapshot = object.snapshot[object.snapshot.length - 1];
 
-        angular.forEach(lastSnapshot, function(val, key) {
-            object[key] = val;
+        angular.forEach(object, function(val, key) {
+            if(key != "snapshot") {
+                object[key] = lastSnapshot[key];
+            }
         });
     }
 
