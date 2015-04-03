@@ -1,6 +1,10 @@
-<h3> install <H3>
+Angular Transaction Manager
+================================================
+Angularjs Module that allows to make snapshots of an object, perform a rollback and restore snapshot version.
 
-<h4>Bower</h3>
+<h3>Install</h3>
+
+<h4>Bower</h4>
 ```sh
 bower install angular-transaction-manager
 ```
@@ -32,71 +36,79 @@ or Open example folder and run
 run grunt server in example folder
 
 
-<h3>Api</h3>
+<h1>API</h1>
 
-work only with $scope object (not with primitives) like this
+works only with $scope object (not with primitives) like this
 ```js
-$scope.foo = {}
+$scope.foo = {};
 ```
 <br>
 <b>TransactionManager.snapshot</b>
-save the actual state of foo
+save the actual state of passed object
 ```js
-$scope.foo = {a: 1, b: "test"}
-TransactionManager.snapshot($scope.foo)
+$scope.foo = {a: 1, b: "test"};
+TransactionManager.snapshot($scope.foo);
 ```
-the result object contan a key snapshot
+the result object contains a key snapshot
 ```js 
 {a: 1, b: "test", snapshot: [{a: 1, b: "test"}]}
 ```
-you can call snapshot more then 1 time and the result object contains a list of all snapshot that you want
+you can call snapshot() more than 1 time, the result object will contain a list of all snapshot
+```js
+$scope.foo = {a: 1, b: "test"};
+TransactionManager.snapshot($scope.foo);
+$scope.foo.b = "changed";
+TransactionManager.snapshot($scope.foo);
+// $scope.foo will be:
+//{a: 1, b: "test", snapshot: [{a: 1, b: "test"}, {a: 1, b: "changed"}]}
+```
 
 <br>
 <b>TransactionManager.rollback</b>
-return to the last snapshot status
+applies the last snapshot
 ```js
-$scope.foo = {a: 1, b: "test"}
-TransactionManager.snapshot($scope.foo)
-$scope.foo.b = "test2" // now foo is ->  {a: 1, b: "test2"}
-TransactionManager.rollback($scope.foo)
+$scope.foo = {a: 1, b: "test"};
+TransactionManager.snapshot($scope.foo);
+$scope.foo.b = "test2"; // now foo is ->  {a: 1, b: "test2"}
+TransactionManager.rollback($scope.foo);
 // now foo is ->  {a: 1, b: "test"}
 ```
 
 <br>
 <b>TransactionManager.canRollback</b>
-returns true if the object was changed from the last snapshot
+returns true in case it has a snapshot and actual state is different from last snapshot
 ```js
-TransactionManager.canRollback($scope.foo)
+TransactionManager.canRollback($scope.foo);
 ```
 
 <br>
-<b>TransactionManager.prevVersion</b>
-came back to the previous snapshot.
+<b>TransactionManager.canRestorePrevious</b>
+return true if passed object has a previous snapshot (<b>old <del>TransactionManager.prevVersion</del></b>)
 ```js
-$scope.foo = {a: 1, b: "test"}
-TransactionManager.snapshot($scope.foo) // now foo is -> {a: 1, b: "test"}
-$scope.foo.b = "test2"
-TransactionManager.snapshot($scope.foo) // now foo is -> {a: 1, b: "test2"}
-TransactionManager.prevVersion($scope.foo)
+TransactionManager.canRestorePrevious($scope.foo);
+```
+
+<br>
+<b>TransactionManager.restorePrevious</b>
+Restore to the state of previous snapshot version.
+```js
+$scope.foo = {a: 1, b: "test"};
+TransactionManager.snapshot($scope.foo); // now foo is -> {a: 1, b: "test"}
+$scope.foo.b = "test2";
+TransactionManager.snapshot($scope.foo); // now foo is -> {a: 1, b: "test2"}
+TransactionManager.restorePrevious($scope.foo);
 // now foo is ->  {a: 1, b: "test"}
 ```
 
 <br>
-<b>TransactionManager.hasPrevVersion</b>
-return true if foo have a previous snapshot
-```js
-TransactionManager.hasPrevVersion($scope.foo)
-```
-
-<br>
 <b>TransactionManager.clear</b>
-clear all snapshots
+Remove all snapshots
 ```js
-TransactionManager.clear($scope.foo)
+TransactionManager.clear($scope.foo);
 ```
 <br>
-<b>TransactionManager.isTransaction</b>
-return true if foo have at least 1 snapshot
+<b>TransactionManager.hasSnapshot</b>
+returns true if passed object has at least 1 snapshot
 ```js
-TransactionManager.isTransaction($scope.foo)
+TransactionManager.hasSnapshot($scope.foo);
 ```
