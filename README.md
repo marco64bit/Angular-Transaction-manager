@@ -24,7 +24,7 @@ var app = angular.module('myApp', ['transactionManager']);
 
 <h3> try demo </h3>
 
-<a href="https://jsfiddle.net/marco_pretelli/0fa6yxb6/1/"> Live demo! </a>
+<a href="https://jsfiddle.net/marco_pretelli/3t9agkqy/1/" target="_blank"> Live demo! </a>
 
 or Open example folder and run
 <pre>
