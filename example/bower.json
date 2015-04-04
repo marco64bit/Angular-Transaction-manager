@@ -1,6 +1,6 @@
 {
-  "name": "prova",
-  "version": "0.0.0",
+  "name": "Transaction Manager example",
+  "version": "0.0.1",
   "dependencies": {
     "angular": "~1.0.7",
     "json3": "~3.2.4",
