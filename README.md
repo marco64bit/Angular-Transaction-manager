@@ -45,15 +45,20 @@ $scope.foo = {};
 <br>
 <b>TransactionManager.snapshot</b>
 save the actual state of passed object
+
 ```js
 $scope.foo = {a: 1, b: "test"};
 TransactionManager.snapshot($scope.foo);
 ```
+
 the result object contains a key snapshot
+
 ```js 
 {a: 1, b: "test", snapshot: [{a: 1, b: "test"}]}
 ```
+
 you can call snapshot() more than 1 time, the result object will contain a list of all snapshot
+
 ```js
 $scope.foo = {a: 1, b: "test"};
 TransactionManager.snapshot($scope.foo);
@@ -66,6 +71,7 @@ TransactionManager.snapshot($scope.foo);
 <br>
 <b>TransactionManager.rollback</b>
 applies the last snapshot
+
 ```js
 $scope.foo = {a: 1, b: "test"};
 TransactionManager.snapshot($scope.foo);
@@ -77,6 +83,7 @@ TransactionManager.rollback($scope.foo);
 <br>
 <b>TransactionManager.canRollback</b>
 returns true in case it has a snapshot and actual state is different from last snapshot
+
 ```js
 TransactionManager.canRollback($scope.foo);
 ```
@@ -84,6 +91,7 @@ TransactionManager.canRollback($scope.foo);
 <br>
 <b>TransactionManager.canRestorePrevious</b>
 return true if passed object has a previous snapshot (<b>old <del>TransactionManager.prevVersion</del></b>)
+
 ```js
 TransactionManager.canRestorePrevious($scope.foo);
 ```
@@ -91,6 +99,7 @@ TransactionManager.canRestorePrevious($scope.foo);
 <br>
 <b>TransactionManager.restorePrevious</b>
 Restore to the state of previous snapshot version.
+
 ```js
 $scope.foo = {a: 1, b: "test"};
 TransactionManager.snapshot($scope.foo); // now foo is -> {a: 1, b: "test"}
@@ -103,12 +112,14 @@ TransactionManager.restorePrevious($scope.foo);
 <br>
 <b>TransactionManager.clear</b>
 Remove all snapshots
+
 ```js
 TransactionManager.clear($scope.foo);
 ```
 <br>
 <b>TransactionManager.hasSnapshot</b>
 returns true if passed object has at least 1 snapshot
+
 ```js
 TransactionManager.hasSnapshot($scope.foo);
 ```
