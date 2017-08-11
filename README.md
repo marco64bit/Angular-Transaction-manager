@@ -5,6 +5,7 @@ Angularjs Module that allows to make snapshots of an object, perform a rollback 
 <h3>Install</h3>
 
 <h4>Bower</h4>
+
 ```sh
 bower install angular-transaction-manager
 ```
